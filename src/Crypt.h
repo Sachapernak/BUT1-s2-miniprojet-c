@@ -20,7 +20,7 @@
 *                                                                             *
 *******************************************************************************
 *                                                                             *
-*  Nom du fichier : Crypt.c                                                   *
+*  Nom du fichier : Crypt.h                                                   *
 *                                                                             *
 ******************************************************************************/
 #include "Lecture.h"
@@ -39,44 +39,6 @@
 void cesarCrypt(int size, int key, char* text);
 void cesarDecrypt(int size, int key, char* text);
 void cesarCharCrypt(int key, char* ch);
-
-
-//Main pour le test
-void main(int argc, char *argv[])
-{
-	int arg;
-	int size;
-	char eotxt = '/';
-	int exit;
-
-	if (argc > 1){
-		arg = strtol(argv[1], NULL, 10);
-		char* text = getText(&size, eotxt, &exit);
-		
-		printf("\nCle : %d\n", arg % 62);
-		printf("\ntext : \n%s\n", text);
-		cesarCrypt(size, arg, text);
-		printf("\ncode : \n%s\n", text);
-		cesarDecrypt(size, arg, text);
-		printf("\ndecrypt: \n%s\n", text);
-	}
-
-	if (argc == 1){
-		char test[65] = "0123456789 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
-		char test2[65] = "0123456789 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
-		printf("%s\n\n", test);
-		cesarCrypt(65, 1, test);
-		printf("%s\n", test);
-		for (int i = 1; i < 62; i++){
-			cesarCrypt(65, 1, test);
-			printf("%s\n", test);
-		}
-		cesarCrypt(65, 33, test);
-		cesarDecrypt(65, 33, test);
-		printf("text : %s\n",test);
-	}
-}
-
 
 /**
  * Chiffre le texte donné en utilisant la technique de chiffrement de César.
