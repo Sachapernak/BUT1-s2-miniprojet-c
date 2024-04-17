@@ -20,7 +20,7 @@
 *                                                                             *
 *******************************************************************************
 *                                                                             *
-*  Nom du fichier : Lecture.c                                                 *
+*  Nom du fichier : Lecture.h                                                 *
 *                                                                             *
 ******************************************************************************/
 
@@ -46,21 +46,24 @@ void clearBuffer();
  * 		   Attention : le pointeur doit etre free() après utilisation !
  */
 char* getText(int* sSize, char eotxt, int* exitCode) {
-	*exitCode = 0;
+	*exitCode = 0; //met le code d'erreur a 0 par défaut
 	char c;
 	char* txt;
-	int size = 1;
-	txt = (char*) malloc(size * sizeof(char));
-	txt[0] = '\0';
+	int size = 1; //La taille du string alloué dynamiquement
+	txt = (char*) malloc(size * sizeof(char)); //aloue une taille de 1 au string
+	txt[0] = '\0'; //met par défaut le caractère de fin de string
 	do {
-		c = getchar();
-		if (c != eotxt) {
-			if ( (c & 128) == 0 ){
+		c = getchar(); //on récup le char
+		if (c != eotxt) { //verifie si le char n'est pas la fin de saisie
+			if ( (c & 128) == 0 ){ //masque binaire, verifie si le char est ASCII
 				size++;
+				//Augmentation de la taille du string de 1
 				txt = (char*)realloc(txt, size * sizeof(char));
-				txt[size-2] = c;
-				txt[size-1] = '\0';
+				txt[size-2] = c; // on insère le nouveau char
+				txt[size-1] = '\0'; //on deplace la fin de string
 			} else {
+				/*Si le char n'est pas ascii, on met le code d'erreur a 1
+				  Le char n'est pas ajouté */
 				*exitCode = 1;
 			}
 		}
@@ -75,6 +78,7 @@ char* getText(int* sSize, char eotxt, int* exitCode) {
  */
 void clearBuffer() {
 	char c = getchar();
+	//On récupère les bits tant qu'on n'arrive pas au char de fin de ligne
 	while ('\n' != c) {
 		c = getchar();
 	}
