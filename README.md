@@ -28,17 +28,24 @@ make
 
 <h4> - Interactif - <h4>
 
-Linux   : ./chiffrementC   \[operation] \[cle] \[texte]
-Windows : chiffrementC.exe \[operation] \[cle] \[texte]
-<br><br>
-<p>Operations  : cc - chiffrement César
-            : cd - dechiffrement César
-            : vc - chiffrement Vigenère
-            : vd - dechiffrement Vigenère<p>
+Linux       : ./chiffrementC<br>
+Windows     : chifrementC.exe<br>
 
 <h4> - Ligne de commande - <h4>
 
-Linux
+Linux       : ./chiffrementC   \[operation] \[cle] \[texte]<br>
+Windows     : chiffrementC.exe \[operation] \[cle] \[texte]<br>
+<br>
+Operations  : cc - chiffrement César<br>
+            : cd - dechiffrement César<br>
+            : vc - chiffrement Vigenère<br>
+            : vd - dechiffrement Vigenère<br>
+<br>
+Cle         : Nombre entier (César)<br>
+            : Texte alphanumérique, pas d'espaces (Vigenère)<br>
+<br>
+Exemple     : ./chiffrementC cc "MaCleSecrete" "Mon texte ultra secret"<br>
+
 
 ## Contributeurs
 
