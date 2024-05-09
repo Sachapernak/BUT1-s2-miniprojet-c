@@ -13,10 +13,10 @@ Il est également possible de directement chiffrer ou dechiffrer en une seule li
 
 ## Installation
 
-Ce programme ne nécessite pas d'être installer. 
+Ce programme ne nécessite pas d'être installer.<br>
 <br>Il suffit de lancer 'chiffrementC.exe' sur windows ou,'chiffrementC' sur linux.
 <br>Il est possible de recompiler le programme sur linux a l'aide du fichier makefile inclut.
-<br>Le programme peut aussi etre recompilé sur windows, a condition d'avoir installé l'utilitaire make a l'aide chocolatey
+<br><br>Le programme peut aussi etre recompilé sur windows, a condition d'avoir installé l'utilitaire make a l'aide chocolatey
 <br><br>Il suffit de se placer dans mini-projet-c/exec et faire:
 ```bash
 make
@@ -28,28 +28,28 @@ make
 
 <h4> - Interactif - <h4>
 
-Linux       : ./chiffrementC<br>
-Windows     : chifrementC.exe<br>
+Linux&emsp;&nbsp;&nbsp;&nbsp;: ./chiffrementC<br>
+Windows&emsp;&nbsp;: chifrementC.exe<br>
 
 <h4> - Ligne de commande - <h4>
 
-Linux       : ./chiffrementC   \[operation] \[cle] \[texte]<br>
-Windows     : chiffrementC.exe \[operation] \[cle] \[texte]<br>
+Linux&nbsp;&nbsp;&nbsp;&emsp;: ./chiffrementC   \[operation] \[cle] \[texte]<br>
+Windows&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: chiffrementC.exe \[operation] \[cle] \[texte]<br>
 <br>
-Operations  : cc - chiffrement César<br>
-            : cd - dechiffrement César<br>
-            : vc - chiffrement Vigenère<br>
-            : vd - dechiffrement Vigenère<br>
+Operations&nbsp;&nbsp;: cc - chiffrement César<br>
+&emsp;&emsp;&emsp;: cd - dechiffrement César<br>
+&emsp;&emsp;&emsp;: vc - chiffrement Vigenère<br>
+&emsp;&emsp;&emsp;: vd - dechiffrement Vigenère<br>
 <br>
-Cle         : Nombre entier (César)<br>
-            : Texte alphanumérique, pas d'espaces (Vigenère)<br>
+Cle&emsp;&emsp;&nbsp;: Nombre entier (César)<br>
+&emsp;&emsp;&emsp;: Texte alphanumérique, pas d'espaces (Vigenère)<br>
 <br>
-Exemple     : ./chiffrementC cc "MaCleSecrete" "Mon texte ultra secret"<br>
+Exemple&emsp;&nbsp;: ./chiffrementC cc "MaCleSecrete" "Mon texte ultra secret"<br>
 
 
 ## Contributeurs
 
-Les contributeurs de ce projets sont : 
+Les contributeurs de ce projets sont :<br>
 DA SILVA Olivier, PERNAK Sacha
 
 ## License
