@@ -28,23 +28,23 @@ make
 
 <h4> - Interactif - <h4>
 
-Linux&emsp;&nbsp;&nbsp;&nbsp;: ./chiffrementC<br>
-Windows&emsp;&nbsp;: chifrementC.exe<br>
+Linux&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ./chiffrementC<br>
+Windows&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: chifrementC.exe<br>
 
 <h4> - Ligne de commande - <h4>
 
-Linux&nbsp;&nbsp;&nbsp;&emsp;: ./chiffrementC   \[operation] \[cle] \[texte]<br>
+Linux&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ./chiffrementC   \[operation] \[cle] \[texte]<br>
 Windows&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: chiffrementC.exe \[operation] \[cle] \[texte]<br>
 <br>
 Operations&nbsp;&nbsp;: cc - chiffrement César<br>
-&emsp;&emsp;&emsp;: cd - dechiffrement César<br>
-&emsp;&emsp;&emsp;: vc - chiffrement Vigenère<br>
-&emsp;&emsp;&emsp;: vd - dechiffrement Vigenère<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: cd - dechiffrement César<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: vc - chiffrement Vigenère<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: vd - dechiffrement Vigenère<br>
 <br>
-Cle&emsp;&emsp;&nbsp;: Nombre entier (César)<br>
-&emsp;&emsp;&emsp;: Texte alphanumérique, pas d'espaces (Vigenère)<br>
+Cle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Nombre entier (César)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: Texte alphanumérique, pas d'espaces (Vigenère)<br>
 <br>
-Exemple&emsp;&nbsp;: ./chiffrementC cc "MaCleSecrete" "Mon texte ultra secret"<br>
+Exemple&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ./chiffrementC cc "MaCleSecrete" "Mon texte ultra secret"<br>
 
 
 ## Contributeurs
