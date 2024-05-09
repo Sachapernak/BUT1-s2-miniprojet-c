@@ -13,23 +13,50 @@ Il est également possible de directement chiffrer ou dechiffrer en une seule li
 
 ## Installation
 
-Ce programme ne nécessite pas d'être installer. 
+Ce programme ne nécessite pas d'être installer.<br>
 <br>Il suffit de lancer 'chiffrementC.exe' sur windows ou,'chiffrementC' sur linux.
-<br>Il est possible de recompiler le programme sur linux a l'aide du fichier makefile inclut. 
-<br><br>Il suffit de se place dans ./exec et faire:
+<br>Il est possible de recompiler le programme sur linux a l'aide du fichier makefile inclut.
+<br><br>Le programme peut aussi etre recompilé sur windows, a condition d'avoir installé l'utilitaire make a l'aide chocolatey
+<br><br>Il suffit de se placer dans mini-projet-c/exec et faire:
 ```bash
 make
 ```
 
 ## Utilisation
 
-```bash
-TODO
-```
+<h3>Pour utiliser le programme :<h3> 
+
+<h4> - Interactif - <h4>
+
+Linux:<br>
+&emsp;./chiffrementC<br>
+Windows:<br>
+&emsp;chifrementC.exe<br>
+
+<h4> - Ligne de commande - <h4>
+
+Linux:<br>
+&emsp;./chiffrementC&emsp;\[operation] \[cle] \[texte]<br>
+Windows:<br>
+&emsp;chiffrementC.exe&ensp; \[operation] \[cle] \[texte]<br>
+<br>
+Operations:<br>
+&emsp;cc - chiffrement César<br>
+&emsp;cd - dechiffrement César<br>
+&emsp;vc - chiffrement Vigenère<br>
+&emsp;vd - dechiffrement Vigenère<br>
+<br>
+Cle:<br>
+&emsp;Nombre entier (César)<br>
+&emsp;Texte alphanumérique, pas d'espaces (Vigenère)<br>
+<br>
+Exemple:<br>
+&emsp;./chiffrementC cc "MaCleSecrete" "Mon texte ultra secret"<br>
+
 
 ## Contributeurs
 
-Les contributeurs de ce projets sont : 
+Les contributeurs de ce projets sont :<br>
 DA SILVA Olivier, PERNAK Sacha
 
 ## License
