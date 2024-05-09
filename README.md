@@ -2,10 +2,10 @@
 
 Ce programme permet de chiffrer et déchiffrer des messages via le chiffrement César et Vigenère.
 Il possède une interface intéractive en ligne de commande:
-![Exemple d'usage en interface intéractive](.ressources/icli.jpg)
+![Exemple d'usage en interface intéractive](./ressources/icli.jpg)
 
 Il est également possible de directement chiffrer ou dechiffrer en une seule ligne de commande :
-![Exemple d'usage en une seule ligne de commande](.ressources/scl.jpg)
+![Exemple d'usage en une seule ligne de commande](./ressources/scl.jpg)
 
 ## Installation
 
