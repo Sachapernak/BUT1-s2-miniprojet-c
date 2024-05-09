@@ -1,14 +1,24 @@
-# Chiffrement de message
+# Projet : Chiffrement de message
 
-Ce logiciel C permet de chiffrer des messages alphanumérique via le chiffrement Caesar, ainsi que de les déchiffrer a l'aide d'une clé de chiffrement.
+<h3>Ce programme permet de chiffrer et déchiffrer des messages via le chiffrement César et Vigenère.</h2>
+
+<p>Il possède une interface intéractive en ligne de commande:
+<br><br>
+<img src="./ressources/icli.jpg" alt="Exemple d'usage en interface intéractive" width="800"/>
+<br><br>
+Il est également possible de directement chiffrer ou dechiffrer en une seule ligne de commande :
+<br><br>
+<img src="./ressources/scl.jpg" alt="Exemple d'usage ligne de commande seule" width="800"/></p>
+
 
 ## Installation
 
-TODO : executable portable ? 
-TODO : executer le makefile ?
-
+Ce programme ne nécessite pas d'être installer. 
+<br>Il suffit de lancer 'chiffrementC.exe' sur windows ou,'chiffrementC' sur linux.
+<br>Il est possible de recompiler le programme sur linux a l'aide du fichier makefile inclut. 
+<br><br>Il suffit de se place dans ./exec et faire:
 ```bash
-    make
+make
 ```
 
 ## Utilisation
@@ -20,7 +30,7 @@ TODO
 ## Contributeurs
 
 Les contributeurs de ce projets sont : 
-DA SILVA Olivier, PERNAK Sacha, ALLASIA Lévi 
+DA SILVA Olivier, PERNAK Sacha
 
 ## License
 
