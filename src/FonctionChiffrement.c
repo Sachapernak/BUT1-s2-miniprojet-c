@@ -20,12 +20,15 @@
 *                                                                             *
 *******************************************************************************
 *                                                                             *
-*  Nom du fichier : Crypt.h                                                   *
+*  Nom du fichier : FonctionChiffrement.c                                     *
 *                                                                             *
 ******************************************************************************/
-#include "Lecture.h"
+
+#include "FonctionLecture.h"
+#include "FonctionChiffrement.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 // Constantes
 #define ALPHABET_SIZE 62 //La taille de l'alphabet: 10 chiffres + 26 maj + 26 minuscules
@@ -35,16 +38,6 @@
 #define MAJ_END 'Z'      // Les majuscules finissent a 'Z'
 #define MIN_START 'a'    // Les minuscules commences a 'a'
 #define MIN_END 'z'      // Les minuscules finissent a 'z'
-
-//Declarations de fonctions
-void cesarCrypt(int size, int key, char* text);
-void cesarDecrypt(int size, int key, char* text);
-void cesarCharCrypt(int key, char* ch);
-
-void vigenereCrypt(char* text, int size, char* key, int keySize);
-void vigenereDecrypt(char* text, int size, char* key, int keySize);
-int* vignereIntKey(int keySize, char* key);
-
 
 /**
  * Chiffre le texte donné en utilisant la technique de chiffrement de César.
@@ -60,48 +53,24 @@ void cesarCrypt(int size, int key, char* text) {
 	for (int i = 0; i < size-1; i++) {
 		cesarCharCrypt(key, &text[i]);
 	}
-
 }
 
+
+/**
+ * Dechiffre le texte donné en utilisant la technique de chiffrement de César.
+ * Dechiffre uniquement l'alphanumérique.
+ * 
+ * @param size La taille du tableau de texte.
+ * @param key La clé de chiffrement.
+ * @param text Un pointeur vers le tableau de texte à dechiffrer.
+ * 
+ * @return rien.
+ */
 void cesarDecrypt(int size, int key, char* text){
 	key = ALPHABET_SIZE - key;
 	cesarCrypt(size, key, text);
 }
 
-void vigenereCrypt(char* text, int size, char* key, int keySize){
-	int* keyVal = vignereIntKey(keySize, key);// keysize - 1 si le texte contient '\0'
-	for (int i = 0; i <size; i++){
-		cesarCharCrypt(keyVal[i%keySize], &text[i]);
-	}
-	free(keyVal);
-}
-
-void vigenereDecrypt(char* text, int size, char* key, int keySize){
-	int* keyVal = vignereIntKey(keySize, key);// keysize - 1 si le texte contient '\0'
-	for (int i = 0; i <size; i++){
-		cesarCharCrypt(ALPHABET_SIZE - keyVal[i%keySize], &text[i]);
-	}
-	free(keyVal);
-}
-
-
-
-int* vignereIntKey(int keySize, char* key){
-	int* keyVal = (int*) malloc(keySize * sizeof(int));
-	for(int i = 0; i < keySize; i++ ){
-		if(key[i] >= NB_START && key[i] <= NB_END){
-			keyVal[i] = key[i] - NB_START;
-		} else if (key[i] >= MAJ_START && key[i] <= MAJ_END){
-			keyVal[i] = (key[i] - MAJ_START) + (NB_END - NB_START) + 1;
-		} else if (key[i]>= MIN_START && key[i] <= MIN_END){
-			keyVal[i] = (key[i] - MIN_START) + (NB_END -  NB_START) + (MAJ_END - MAJ_START) + 2;
-		} else { 
-			keyVal[i] = 0;
-		}
-	}
-	return keyVal;
-
-}
 
 /**
  * Chiffre un caractère donné en utilisant la technique de chiffrement de César.
@@ -182,4 +151,93 @@ void cesarCharCrypt(int key, char* ch){
 		}
 	}
 
+}
+
+/**
+ * Chiffre le texte donné en utilisant la technique de chiffrement de Vigenere.
+ * Chiffre uniquement l'alphanumérique.
+ * 
+ * @param text Un pointeur vers le tableau de texte à chiffrer.
+ * @param size La taille du tableau de texte.
+ * @param key La clé de chiffrement.
+ * @param keySize La taille de la cle. Mettre keysize-1 si le texte contient '\0' a la fin
+ * 
+ * @return rien.
+ */
+void vigenereCrypt(char* text, int size, char* key, int keySize){
+	int* keyVal = vignereIntKey(keySize, key);
+	for (int i = 0; i <size; i++){
+		//i%keySize pour repeter la cle de chiffrement:
+		// 12 -> 12121212 pour un texte de taille 8
+		cesarCharCrypt(keyVal[i%keySize], &text[i]);
+	}
+	free(keyVal);
+}
+
+
+/**
+ * Dechiffre le texte donné en utilisant la technique de chiffrement de Vigenere.
+ * Dechiffre uniquement l'alphanumérique.
+ * 
+ * @param text Un pointeur vers le tableau de texte à chiffrer.
+ * @param size La taille du tableau de texte.
+ * @param key La clé de chiffrement.
+ * @param keySize La taille de la cle
+ * 
+ * @return rien.
+ */
+void vigenereDecrypt(char* text, int size, char* key, int keySize){
+	int* keyVal = vignereIntKey(keySize, key);// 
+	
+	for (int i = 0; i <size; i++){
+		cesarCharCrypt(ALPHABET_SIZE - keyVal[i%keySize], &text[i]);
+	}
+	free(keyVal);
+}
+
+
+/**
+ * Transforme la cle texte en un tableau d'entier.
+ * 
+ * La table de chiffrement est la suivante :
+ * 
+ * 00 01 02 03 04 05 06 07 08 09
+ * 0  1  2  3  4  5  6  7  8  9
+ *
+ * 10 11 12 13 14 15 15 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
+ * A  B  C  D  E  F  G  H  I  J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z 
+ *
+ * 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61
+ * a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z
+ * 
+ * @param keySize La taille de la cle.
+ * @param key la clé texte.
+ * 
+ * @return La clé sous form de tableau d'entier
+ */
+int* vignereIntKey(int keySize, char* key){
+	int* keyVal = (int*) malloc(keySize * sizeof(int));
+
+	for(int i = 0; i < keySize; i++ ){
+		//char entre 0 et 9
+		// 0 -> 0 et 9 -> 9
+		if(key[i] >= NB_START && key[i] <= NB_END){
+			keyVal[i] = key[i] - NB_START;
+
+		//char entre A et Z
+		// A -> 10 Z -> 35
+		} else if (key[i] >= MAJ_START && key[i] <= MAJ_END){
+			keyVal[i] = (key[i] - MAJ_START) + (NB_END - NB_START) + 1;
+
+		//char entre a et z
+		// a -> 36 Z -> 61
+		} else if (key[i]>= MIN_START && key[i] <= MIN_END){
+			keyVal[i] = (key[i] - MIN_START) + (NB_END -  NB_START) + (MAJ_END - MAJ_START) + 2;
+		
+		// Valeur invalide (ne devrait pas etre atteint normalement)
+		} else { 
+			keyVal[i] = 0;
+		}
+	}
+	return keyVal;
 }
