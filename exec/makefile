@@ -1,5 +1,5 @@
 #### Makefile
-#### version 5
+#### version 5.1
 
 # Note : ne pas mettre de commentaires a coté des regles !
 
@@ -8,12 +8,14 @@ CC=gcc
 # Définit les options de compilation
 CFLAGS=-g -I$(IDIR)
 
-#repertoir des "objects"  (.o)
+# repertoir des "objects"  (.o)
 ODIR=../obj
-#repertoir des "includes" (.h)
+# repertoir des "includes" (.h)
 IDIR =../headers
-#repertoir des "binaries" (executables)
+# repertoir des "binaries" (executables)
 BDIR =../exec
+# repertoir des fichiers sources (.c)
+SDIR=../src
 
 #Liste des fichiers d'en-tete (les .h)
 _DEPS = FonctionLecture.h FonctionChiffrement.h FonctionMenu.h
@@ -33,7 +35,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 # -o $@ 		: le .o auras le nom de ce qui est a gauche du ":"
 # $< 			: le premier fichier source prérequis
 # $(CFLAGS)		: les options
-$(ODIR)/%.o: %.c $(DEPS)
+$(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 # Regle pour génerer le fichier executable dans le repertoire des executables

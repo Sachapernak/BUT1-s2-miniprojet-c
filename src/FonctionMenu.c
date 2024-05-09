@@ -198,6 +198,12 @@ void chiffrementKB(int type, char * eotxt){
 	// Récuperation de la clé
 	printf(ANSI_COLOR_CYAN);
 	keyChar = getOnlyText(&keySize, *eotxt);
+	while (keySize == 1){
+		printf(ANSI_COLOR_MAGENTA"[Attention] Valeur incorrecte, veuillez reessayer (La cle ne peut etre vide)\n"ANSI_COLOR_RESET">");
+		free(keyChar);
+		printf(ANSI_COLOR_CYAN);
+		keyChar = getOnlyText(&keySize, *eotxt);
+	}
 	printf(ANSI_COLOR_RESET);
 
 	// Conversion de la clé en entier si nécessaire (pour le chiffrement Cesar)
@@ -412,6 +418,12 @@ void entreeCmd(int argc, char *argv[]) {
         printf("Veuillez entrer la cle de chiffrement (%s). Marqueur de fin de saisie: '/'\n>", (type <= 1) ? "entier positif" : "Alphanumerique");
         printf(ANSI_COLOR_CYAN);
         keyChar = getOnlyText(&keySize, eotxt);
+        while (keySize == 1){
+			printf(ANSI_COLOR_MAGENTA"[Attention] Valeur incorrecte, veuillez reessayer (La cle ne peut etre vide)\n"ANSI_COLOR_RESET">");
+			free(keyChar);
+			printf(ANSI_COLOR_CYAN);
+			keyChar = getOnlyText(&keySize, eotxt);
+		}
         printf(ANSI_COLOR_RESET);
 
         /// Conversion de la clé en entier si nécessaire pour le chiffrement de César
