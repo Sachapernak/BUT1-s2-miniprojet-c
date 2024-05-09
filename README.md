@@ -3,12 +3,12 @@
 <h3>Ce programme permet de chiffrer et déchiffrer des messages via le chiffrement César et Vigenère.</h2>
 
 <p>Il possède une interface intéractive en ligne de commande:
-<br>
-<img src="./ressources/icli.jpg" alt="Exemple d'usage en interface intéractive" width="500"/>
-<br>
+<br><br>
+<img src="./ressources/icli.jpg" alt="Exemple d'usage en interface intéractive" width="800"/>
+<br><br>
 Il est également possible de directement chiffrer ou dechiffrer en une seule ligne de commande :
-<br>
-<img src="./ressources/scl.jpg" alt="Exemple d'usage ligne de commande seule" width="500"/></p>
+<br><br>
+<img src="./ressources/scl.jpg" alt="Exemple d'usage ligne de commande seule" width="800"/></p>
 
 
 ## Installation
@@ -18,7 +18,7 @@ Ce programme ne nécessite pas d'être installer.
 <br>Il est possible de recompiler le programme sur linux a l'aide du fichier makefile inclut. 
 <br><br>Il suffit de se place dans ./exec et faire:
 ```bash
-    make
+make
 ```
 
 ## Utilisation
