@@ -4,11 +4,11 @@
 
 <p>Il possède une interface intéractive en ligne de commande:
 <br>
-<img src="./ressources/icli.jpg" alt="Exemple d'usage en interface intéractive" width="200"/>
+<img src="./ressources/icli.jpg" alt="Exemple d'usage en interface intéractive" width="500"/>
 <br>
 Il est également possible de directement chiffrer ou dechiffrer en une seule ligne de commande :
 <br>
-<img src="./ressources/scl.jpg" alt="Exemple d'usage ligne de commande seule" width="200"/></p>
+<img src="./ressources/scl.jpg" alt="Exemple d'usage ligne de commande seule" width="500"/></p>
 
 
 ## Installation
