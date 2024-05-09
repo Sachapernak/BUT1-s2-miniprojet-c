@@ -15,17 +15,30 @@ Il est également possible de directement chiffrer ou dechiffrer en une seule li
 
 Ce programme ne nécessite pas d'être installer. 
 <br>Il suffit de lancer 'chiffrementC.exe' sur windows ou,'chiffrementC' sur linux.
-<br>Il est possible de recompiler le programme sur linux a l'aide du fichier makefile inclut. 
-<br><br>Il suffit de se place dans ./exec et faire:
+<br>Il est possible de recompiler le programme sur linux a l'aide du fichier makefile inclut.
+<br>Le programme peut aussi etre recompilé sur windows, a condition d'avoir installé l'utilitaire make a l'aide chocolatey
+<br><br>Il suffit de se placer dans mini-projet-c/exec et faire:
 ```bash
 make
 ```
 
 ## Utilisation
 
-```bash
-TODO
-```
+<h3>Pour utiliser le programme :<h3> 
+
+<h4> - Interactif - <h4>
+
+Linux   : ./chiffrementC   \[operation] \[cle] \[texte]
+Windows : chiffrementC.exe \[operation] \[cle] \[texte]
+<br><br>
+<p>Operations  : cc - chiffrement César
+            : cd - dechiffrement César
+            : vc - chiffrement Vigenère
+            : vd - dechiffrement Vigenère<p>
+
+<h4> - Ligne de commande - <h4>
+
+Linux
 
 ## Contributeurs
 
