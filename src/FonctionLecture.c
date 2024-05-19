@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
 /**
  * Cette fonction permet de récuperer du texte ASCII tapé au clavier tant que le
@@ -158,6 +159,7 @@ char* getTextFic(int* sSize, char* path, int* exitCode) {
 
 	if (fic == NULL){
 		*exitCode = 3; //erreur a 3 si le fichier ne s'est pas ouvert
+		return NULL;
 	} else {
 		//le fichier s'est ouvert avec succès
 		do {
@@ -190,8 +192,21 @@ char* getTextFic(int* sSize, char* path, int* exitCode) {
 
 	fclose(fic);
 	*sSize = size;
-	clearBuffer();
 	return txt;
+}
+
+int writeText(char * path, char* text){
+	FILE* fic;
+	fic = fopen(path, "a");
+	if (fic == NULL){
+		return 3;
+	}
+	time_t t = time(NULL);
+  	struct tm tm = *localtime(&t);
+	fprintf(fic,"////////////// Date de chiffrement: %d-%02d-%02d %02d:%02d:%02d\n\n%s\n\n\n",
+			tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, text);
+	fclose(fic);
+	return 0;
 }
 
 

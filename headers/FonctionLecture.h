@@ -78,7 +78,7 @@ char* getOnlyText(int* sSize, char eotxt);
  */
 char* getTextFic(int* sSize, char* path, int* exitCode);
 
-
+int writeText(char * path, char* text);
 /**
  * Fonction pour vider le buffer d'entrée
  */
