@@ -46,7 +46,10 @@
  * 		   Attention : le pointeur doit etre free() après utilisation !
  */
 char* getText(int* sSize, char eotxt, int* exitCode) {
-	*exitCode = 0; //met le code d'erreur a 0 par défaut
+	if (exitCode != NULL){
+		*exitCode = 0; //met le code d'erreur a 0 par défaut	
+	}
+	
 
 	char c;
 	char* txt;
@@ -68,7 +71,9 @@ char* getText(int* sSize, char eotxt, int* exitCode) {
 
 				if (txt == NULL) {
                         // L'allocation mémoire a raté
-                        *exitCode = 2; // Code d'erreur 2 pour allocation mémoire raté
+						if (exitCode != NULL){
+                        	*exitCode = 2; // Code d'erreur 2 pour allocation mémoire raté
+                        }
                         return NULL;
                 }
 
@@ -78,12 +83,16 @@ char* getText(int* sSize, char eotxt, int* exitCode) {
 			} else {
 				/*Si le char n'est pas ascii, on met le code d'erreur a 1
 				  Le char n'est pas ajouté */
-				*exitCode = 1;
+				if (exitCode != NULL){
+                        	*exitCode = 1;
+                        }
 			}
 		}
 	} while (c != eotxt);
-
-	*sSize = size;
+	if (sSize != NULL){
+		*sSize = size;
+	}
+	
 	clearBuffer();
 	return txt;
 }
@@ -195,7 +204,7 @@ char* getTextFic(int* sSize, char* path, int* exitCode) {
 	return txt;
 }
 
-int writeText(char * path, char* text){
+int writeText(char* path, char* text, int type){
 	FILE* fic;
 	fic = fopen(path, "a");
 	if (fic == NULL){
@@ -203,7 +212,8 @@ int writeText(char * path, char* text){
 	}
 	time_t t = time(NULL);
   	struct tm tm = *localtime(&t);
-	fprintf(fic,"////////////// Date de chiffrement: %d-%02d-%02d %02d:%02d:%02d\n\n%s\n\n\n",
+	fprintf(fic,"////////////// Date de %s (%s): %d-%02d-%02d %02d:%02d:%02d\n\n%s\n\n\n",
+			(type%2 == 0) ? "chiffrement" : "dechiffrement", (type <= 1) ? "Cesar" : "Vigenere",
 			tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec, text);
 	fclose(fic);
 	return 0;

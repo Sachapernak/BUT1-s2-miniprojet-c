@@ -66,14 +66,15 @@ void main(int argc, char *argv[]) {
 	enableColor();
 
 	char eotxt = '/'; // valeur par défaut
+	char * path = "./ResultatChiffrement.txt";
+	int enr = 1;
 
 	// Si il n'y a pas d'arguments en ligne de commande
 	if (argc == 1){
 		printf("\nBienvenue dans ce programme de chiffrement.\n");
 		printf("\nPar defaut, le caractere de fin de saisie est '/'."
 			ANSI_COLOR_MAGENTA"\n>Veuillez entrer '/' a la fin de votre saisie puis appuyer sur la touche entree.\n\n"ANSI_COLOR_RESET);
-		menuKB(&eotxt);
-
+		menuKB(&eotxt, path, &enr);
 	} else {
 		entreeCmd(argc,argv);
 	}
