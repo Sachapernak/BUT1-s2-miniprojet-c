@@ -52,8 +52,10 @@
  * 
  * @param eotxt Le marqueur de fin de saisie utilisé pour la saisie clavier.
  *              Lorsque l'utilisateur appuie sur ce marqueur, la saisie est terminée.
+ * @param path Le chemin ou nom du fichier qui enregistre le resultat des opérations
+ * @param enrSi le resultat des operations doit etre enregistrer ou nom (1 is oui, 0 si non.)
  */
-void menuKB(char* eotxt){
+void menuKB(char* eotxt, char* path, int* enr){
 		char c;
 		
 		//affichage du menu
@@ -65,8 +67,8 @@ void menuKB(char* eotxt){
 			"\n 3) chiffrer" 
 			"\n 4) dechiffrer"
 			"\n\n -- Utilitaire --"
-			"\n 5) Menu des fichiers texte"
-			"\n 6) Choisir marqueur de fin d'entree (actuel : ");
+			"\n 5) Enregistrement dans un fichier (%s"ANSI_COLOR_RESET")"
+			"\n 6) Choisir marqueur de fin d'entree (actuel : ", (*enr == 1) ? ANSI_COLOR_GREEN"Activé" : ANSI_COLOR_RED"Desactivé");
 		
 		//affichage du marqueur de fin de saisie
 		if (*eotxt == '\n'){ 
@@ -75,8 +77,9 @@ void menuKB(char* eotxt){
 			printf("'%c')", *eotxt);
 		
 		}
-		printf("\n\n 0) Quitter"
-			"\n\n>");
+		printf("\n 7) Menu des fichiers"
+				"\n\n 0) Quitter"
+				"\n\n>");
 
 		// Saisie clavier
 		printf(ANSI_COLOR_CYAN);
@@ -89,32 +92,52 @@ void menuKB(char* eotxt){
 		{
 		case '1': 
 			// Chiffrement cesar
-			chiffrementKB(0, eotxt);
-			menuKB(eotxt);
+			chiffrementKB(0, eotxt, enr, path);
+			menuKB(eotxt, path, enr);
 			break;
 
 		case '2':
 			// Dechiffrement cesar
-			chiffrementKB(1, eotxt);
-			menuKB(eotxt);
+			chiffrementKB(1, eotxt, enr, path);
+			menuKB(eotxt, path, enr);
 			break;
 
 		case '3':
 			// Chiffrement vigenere
-			chiffrementKB(2, eotxt);
-			menuKB(eotxt);
+			chiffrementKB(2, eotxt, enr, path);
+			menuKB(eotxt, path, enr);
 			break;
 
 		case '4':
 			// Dechiffrement vigenere
-			chiffrementKB(3, eotxt);
-			menuKB(eotxt);
+			chiffrementKB(3, eotxt, enr, path);
+			menuKB(eotxt, path, enr);
 			break;
 
 		case '5':
-			// Accès au menu des fichiers
-			printf("\nEn cours d'implementation...\n");
+			// activer l'enregistrement du résultat dans un fichier
+			printf("L'enregistrement dans un fichier est actuellement : %s\n"ANSI_COLOR_RESET, (*enr == 0) ? ANSI_COLOR_RED"désactivé" : ANSI_COLOR_GREEN"activé" );
+			printf("Voulez vous changer ? (o/n)\n>"ANSI_COLOR_CYAN);
+			c = getchar();
+			clearBuffer();
+			if (c=='o' || c =='O'){
+				*enr = (*enr == 0) ? 1 : 0;
+				printf(ANSI_COLOR_RESET"L'enregistrement dans un fichier est maintenant : %s\n"ANSI_COLOR_RESET, (*enr == 0) ? ANSI_COLOR_RED"désactivé" : ANSI_COLOR_GREEN"activé" );
+			}
+
+			printf(ANSI_COLOR_RESET"\nLe chemin est actuellement : "ANSI_COLOR_MAGENTA"%s\n"ANSI_COLOR_RESET, path);
+			printf("Voulez vous changer ? (o/n)\n>"ANSI_COLOR_CYAN);
+			c = getchar();
+			clearBuffer();
+			if (c=='o' || c =='O'){
+				printf(ANSI_COLOR_RESET"Veuillez entrer le nouveau chemin. ASCII seulement, accents interdits !\n[Marqueur de fin : entrée * 2]\n>"ANSI_COLOR_CYAN);
+				path = getText(NULL, '\n', NULL);
+				printf(ANSI_COLOR_RESET"Nouveau chemin : "ANSI_COLOR_MAGENTA"%s"ANSI_COLOR_RESET"\n", path);
+			}
+			printf(ANSI_COLOR_RESET);
+			menuKB(eotxt, path, enr);
 			break;
+			
 
 		case '6':
 			// Changement du marqueur de fin
@@ -141,7 +164,12 @@ void menuKB(char* eotxt){
 			}
 			printf("\n"ANSI_COLOR_RESET);
 			
-			menuKB(eotxt);
+			menuKB(eotxt, path, enr);
+			break;
+
+		case '7':
+			// Accès au menu des fichiers
+			printf("\nEn cours d'implementation...\n");
 			break;
 
 		case '0':
@@ -150,7 +178,7 @@ void menuKB(char* eotxt){
 
 		default:
 			printf("\n\n [Entree non reconnue. Veuillez reessayer.]\n\n");
-			menuKB(eotxt);
+			menuKB(eotxt, path, enr);
 		}
 }
 
@@ -166,7 +194,7 @@ void menuKB(char* eotxt){
  * @param eotxt Caractère de fin de saisie.
  * @return rien.
  */
-void chiffrementKB(int type, char * eotxt){
+void chiffrementKB(int type, char * eotxt, int * enr, char * path){
 	// Type <= 1 : Cesar
 	// Type >= 2 : vigenere
 	// Type % 2 = 0 : chiffrer
@@ -181,7 +209,7 @@ void chiffrementKB(int type, char * eotxt){
 	int keyC; 			// Clé de chiffrement en int (utilisée si le type est Cesar)
 
  	char c;				// Caractère utilisé pour les saisies clavier
-	int exitCode;		// Code de sortie de la fonction getText
+	int exitCode;		// Code de sortie des fonctions qui en ont
 	int size;			// Taille du texte a chiffrer / dechiffrer, saisi par l'utilisateur
 
 	printf("Veuillez entrer la cle de chiffrement (%s)\n"
@@ -276,6 +304,12 @@ void chiffrementKB(int type, char * eotxt){
 			printf("\nVotre texte %s: \n%s%s"ANSI_COLOR_RESET"\n\n",(type%2 == 0) ? "chiffre" : "dechiffre",
 																	(type%2 == 0) ? ANSI_COLOR_RED : ANSI_COLOR_GREEN,
 																	input);
+			if (*enr == 1){
+				exitCode = writeText(path, input, type);
+				if (exitCode == 3){
+					printf(ANSI_COLOR_RED"Echec de l'ouverture du fichier a l'adresse \"%s\"\n"ANSI_COLOR_RESET, path);
+				}
+			}
 
 			printf(ANSI_COLOR_MAGENTA"\n<Entrer une touche pour continuer>\n"ANSI_COLOR_RESET);
 			clearBuffer();
@@ -307,6 +341,12 @@ void chiffrementKB(int type, char * eotxt){
 			printf("\nVotre texte %s: \n%s%s"ANSI_COLOR_RESET"\n\n",(type%2 == 0) ? "chiffre" : "dechiffre",
 																	(type%2 == 0) ? ANSI_COLOR_RED : ANSI_COLOR_GREEN,
 																	input);
+			if (*enr == 1){
+				exitCode = writeText(path, input, type);
+				if (exitCode == 3){
+					printf(ANSI_COLOR_RED"Echec de l'ouverture du fichier a l'adresse \"%s\"\n"ANSI_COLOR_RESET, path);
+				}
+			}
 
 			printf(ANSI_COLOR_MAGENTA"\n<Entrer une touche pour continuer>"ANSI_COLOR_RESET);
 			clearBuffer();

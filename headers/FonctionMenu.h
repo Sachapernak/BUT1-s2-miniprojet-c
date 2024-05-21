@@ -40,8 +40,10 @@
  * 
  * @param eotxt Le marqueur de fin de saisie utilisé pour la saisie clavier.
  *              Lorsque l'utilisateur appuie sur ce marqueur, la saisie est terminée.
+ * @param path Le chemin ou nom du fichier qui enregistre le resultat des opérations
+ * @param enr Si le resultat des operations doit etre enregistrer ou nom (1 is oui, 0 si non.)
  */
-void menuKB(char* eotxt);
+void menuKB(char* eotxt, char* path, int* enr);
 
 
 /**
@@ -55,7 +57,7 @@ void menuKB(char* eotxt);
  * @param eotxt Caractère de fin de saisie.
  * @return rien.
  */
-void chiffrementKB(int type, char * eotxt);
+void chiffrementKB(int type, char * eotxt, int* enr, char* path);
 
 
 /**
