@@ -1,6 +1,7 @@
 # Projet : Chiffrement de message
 
 <h3>Ce programme permet de chiffrer et déchiffrer des messages via le chiffrement César et Vigenère.</h2>
+<p>Note : ce projet a été transféré depuis mon gitlab privé</p>
 
 <p>Il possède une interface intéractive en ligne de commande:
 <br><br>
